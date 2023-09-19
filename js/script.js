@@ -1,5 +1,6 @@
 const btn = document.querySelector(".btn");
 const container = document.querySelector(".container");
+const message = document.querySelector("#output");
 
 btn.addEventListener("click", function(){
   reset();
@@ -16,6 +17,8 @@ btn.addEventListener("click", function(){
 
 function reset(){
   container.innerHTML = "";
+  message.innerHTML = "";
+
 }
 
 function rowColBox(value){
@@ -33,12 +36,17 @@ function rowColBox(value){
 
 function startBox(difficulty){
   let counter = 0;
+  let points = 0;
   const nRowCol = rowColBox(difficulty);
   const widthBox = 100 / nRowCol;
+  const boxTot = nRowCol * nRowCol;
+  const bomb = random(boxTot);
+  console.log(bomb);
 
   for(let i = 1; i <= nRowCol; i++){
     for(let j = 1; j <= nRowCol; j++){
       counter++;
+      
       const box = createBox(widthBox,counter);
       
       box.addEventListener("click",function(){
@@ -57,4 +65,12 @@ function createBox(widthBox,nBox){
   newBox.style.width = widthBox + "%";
   newBox._boxID = nBox;
   return newBox;
+}
+
+function random(boxTot){
+  let bomb = [];
+  for(let i = 0; i < 16; i++){
+    bomb.push(Math.ceil(Math.random() * boxTot));
+  }
+  return bomb;
 }
