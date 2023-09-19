@@ -39,12 +39,16 @@ h2{
   background-color: chartreuse;
 }
 
-.square.click{
+.square.clicked{
   background-color: aqua;
 }
 
 .square.bomb{
   background-color: red;
+}
+
+.end-game{
+  cursor:default;
 }
 
 .btn{

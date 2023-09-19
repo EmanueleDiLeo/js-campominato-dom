@@ -1,6 +1,7 @@
 const btn = document.querySelector(".btn");
 const container = document.querySelector(".container");
 const message = document.querySelector("#output");
+const messPoin = document.querySelector("#points");
 
 btn.addEventListener("click", function(){
   reset();
@@ -42,36 +43,41 @@ function startBox(difficulty){
   const boxTot = nRowCol * nRowCol;
   const bomb = random(boxTot);
   console.log(bomb);
-
+  const maxPoints = boxTot - 16;
+  
   for(let i = 1; i <= nRowCol; i++){
     for(let j = 1; j <= nRowCol; j++){
       counter++;
       
       const box = createBox(widthBox,counter);
-      
+
       box.addEventListener("click",function game(){
         if(bomb.includes(this._boxID)){
           console.log("su if: " + this._boxID);
-          this.classList.add("bomb");
-          console.log(this._boxID);
+          this.classList.add("bomb");       
+          gameOver(points);
+          endGame(bomb);
+          
         }
         else{
           console.log("su else: " + this._boxID);
-          this.classList.add("click");
+          this.classList.add("clicked");
           this.removeEventListener("click",game);
           points++;
+          if(points === maxPoints){
+            win(points);
+            endGame(bomb);
+          }
           console.log(points);
-          console.log(this._boxID);
         }
-
+        console.log(this._boxID);
+      
       });
-
+      
       container.append(box);
     }
   }
 }
-
-
 
 function createBox(widthBox,nBox){
   const newBox = document.createElement('div');
@@ -87,4 +93,24 @@ function random(boxTot){
     bomb.push(Math.ceil(Math.random() * boxTot));
   }
   return bomb;
+}
+
+function gameOver(points){
+  message.innerHTML = "HAI PERSO";
+  messPoin.innerHTML = "Punti totalizzati = " + points;
+  
+}
+
+function win(points){
+  message.innerHTML = "HAI VINTO";
+  messPoin.innerHTML = "Punti totalizzati = " + points;
+}
+
+function endGame(bomb){
+  const boxs = document.getElementsByClassName("square");
+  for(let i = 0; i < boxs.length; i++){
+    if(bomb.includes(boxs[i]._boxID)){
+      boxs[i].classList.add("bomb");
+    }
+  }
 }
