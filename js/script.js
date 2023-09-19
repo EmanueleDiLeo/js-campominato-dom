@@ -113,4 +113,5 @@ function endGame(bomb){
       boxs[i].classList.add("bomb");
     }
   }
+  container.innerHTML += `<div class="end-game"></div>`;
 }
