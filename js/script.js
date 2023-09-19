@@ -49,15 +49,29 @@ function startBox(difficulty){
       
       const box = createBox(widthBox,counter);
       
-      box.addEventListener("click",function(){
-        this.classList.add("click");
-        console.log(this._boxID);
+      box.addEventListener("click",function game(){
+        if(bomb.includes(this._boxID)){
+          console.log("su if: " + this._boxID);
+          this.classList.add("bomb");
+          console.log(this._boxID);
+        }
+        else{
+          console.log("su else: " + this._boxID);
+          this.classList.add("click");
+          this.removeEventListener("click",game);
+          points++;
+          console.log(points);
+          console.log(this._boxID);
+        }
+
       });
 
       container.append(box);
     }
   }
 }
+
+
 
 function createBox(widthBox,nBox){
   const newBox = document.createElement('div');

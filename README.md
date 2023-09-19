@@ -11,5 +11,5 @@ Al termine della partita il software deve comunicare il punteggio, cioè il nume
 1. aggiungere un h2 su html che stampa il messaggio di fine gioco e fare il reset allo start
 1. creare una classe bomb su css
 1. creare una funzione random con dentro un ciclo fino a 16 e il random che va da 1 al numero di celle
-
+1. 
 
