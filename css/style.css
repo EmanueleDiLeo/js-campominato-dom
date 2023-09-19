@@ -1,0 +1,60 @@
+/************************************ GENERAL */
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+header{
+  height: 80px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+main{
+  height: calc(100vh - 80px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+h2{
+  padding-top: 40px;
+}
+
+.container{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  height: 600px;
+  width: 600px;
+}
+
+.square{
+  border: 2px solid white;
+  aspect-ratio: 1 / 1;
+  cursor: pointer;
+  background-color: chartreuse;
+}
+
+.square.click{
+  background-color: aqua;
+}
+
+.btn{
+  margin-left: 20px;
+  padding: 8px 20px;
+  background-color: rgb(113, 219, 6);
+  border: 1px solid white;
+}
+
+.btn:hover{
+  background-color: rgb(126, 241, 10);
+  color: white;
+  text-decoration: none;
+}
+
+select{
+  margin: 20px;
+}
