@@ -7,19 +7,14 @@ btn.addEventListener("click", function(){
   reset();
   const difficulty = (document.querySelector("#difficulty").value).toLowerCase();
   startBox(difficulty);
-  
-  
 });
-
-
-
 
 // Function
 
 function reset(){
   container.innerHTML = "";
   message.innerHTML = "";
-
+  messPoin.innerHTML = "";
 }
 
 function rowColBox(value){
@@ -36,7 +31,6 @@ function rowColBox(value){
 }
 
 function startBox(difficulty){
-  let counter = 0;
   let points = 0;
   const nRowCol = rowColBox(difficulty);
   const widthBox = 100 / nRowCol;
@@ -45,37 +39,32 @@ function startBox(difficulty){
   console.log(bomb);
   const maxPoints = boxTot - 16;
   
-  for(let i = 1; i <= nRowCol; i++){
-    for(let j = 1; j <= nRowCol; j++){
-      counter++;
-      
-      const box = createBox(widthBox,counter);
+  for(let i = 1; i <= boxTot; i++){
+    const box = createBox(widthBox,i);
 
-      box.addEventListener("click",function game(){
-        if(bomb.includes(this._boxID)){
-          console.log("su if: " + this._boxID);
-          this.classList.add("bomb");       
-          gameOver(points);
+    box.addEventListener("click",function game(){
+      if(bomb.includes(this._boxID)){
+        console.log("su if: " + this._boxID);
+        this.classList.add("bomb");       
+        gameOver(points);
+        endGame(bomb); 
+      }
+      else{
+        console.log("su else: " + this._boxID);
+        
+        this.classList.add("clicked");
+        this.removeEventListener("click",game);
+        points++;
+        if(points === maxPoints){
+          win(points);
           endGame(bomb);
-          
         }
-        else{
-          console.log("su else: " + this._boxID);
-          this.classList.add("clicked");
-          this.removeEventListener("click",game);
-          points++;
-          if(points === maxPoints){
-            win(points);
-            endGame(bomb);
-          }
-          console.log(points);
-        }
-        console.log(this._boxID);
-      
-      });
-      
-      container.append(box);
-    }
+        console.log(points);
+      }
+      console.log(this._boxID);
+    });
+    
+    container.append(box);
   }
 }
 
@@ -98,7 +87,6 @@ function random(boxTot){
 function gameOver(points){
   message.innerHTML = "HAI PERSO";
   messPoin.innerHTML = "Punti totalizzati = " + points;
-  
 }
 
 function win(points){
